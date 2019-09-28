@@ -1,10 +1,15 @@
+## Client documentation
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
-In the project directory, you can run:
+In the project directory (./client), you can run:
 
 ### `npm start`
+
+or from root folder run
+
+### `npm start --prefix ./client`
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -66,3 +71,17 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+## Api documentation
+
+## Available Scripts
+
+In the project directory(./api_server), you can run:
+
+### `npm start`
+### `npm run debug` - will run app with debugger connecting
+
+or from root folder run
+
+### `npm start --prefix ./api_server`

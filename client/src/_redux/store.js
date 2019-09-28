@@ -3,24 +3,22 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import throttle from 'lodash.throttle';
 import thunk from 'redux-thunk';
 
-import { getStateFromLS, saveStateToLS} from '../utils/localStorage';
-import sessionReducer from './reducers/sessionReducer';
+import { getStateFromLS, saveStateToLS } from '../utils/localStorage';
+import sessionReducer from '../components/Login/sessionReducer';
 
 const enhancer = composeWithDevTools(applyMiddleware(thunk));
 const persistedState = getStateFromLS();
 
-const store = createStore(
-  sessionReducer,
-  persistedState,
-  enhancer,
-);
+const store = createStore(sessionReducer, persistedState, enhancer);
 
-store.subscribe(throttle(() => {
-  const { session } = store.getState();
-  saveStateToLS({
-    ...session,
-    error: null,
-  });
-}, 1000));
+store.subscribe(
+  throttle(() => {
+    const { session } = store.getState();
+    saveStateToLS({
+      ...session,
+      error: null,
+    });
+  }, 1000)
+);
 
 export default store;
