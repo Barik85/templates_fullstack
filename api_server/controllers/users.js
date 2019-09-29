@@ -63,7 +63,7 @@ const loginUser = async (req, res, next) => {
   } catch (err) {
     res.status(err.status || 500).send({error: err.message || 'fail'});
   }
-}
+};
 
 const getUsers = async (req, res, next) => {
   const { user } = req;
@@ -74,6 +74,22 @@ const getUsers = async (req, res, next) => {
   } else {
     res.status(403).send({ error: 'Forbidden'});
   }
-}
+};
 
-module.exports = { createUser, loginUser, getUsers };
+const logoutUser = async (req, res, next) => {
+  try {
+    const { user } = req;
+
+    if (user) {
+      user.tokens = user.tokens.filter((token) => token.token !== req.token);
+      await user.save();
+      res.status(204).send();
+    } else {
+      res.status(403).send({ error: 'Forbidden'});
+    }
+  } catch(err) {
+    res.status(500).send(err);
+  }
+};
+
+module.exports = { createUser, loginUser, getUsers, logoutUser };

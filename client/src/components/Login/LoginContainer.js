@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
-import { loginUser } from './login_actions';
+import { loginUser, registerUser } from './login_actions';
 import LoginPage from './LoginPage';
 
 const mSTP = state => state;
-const mDTP = { loginUser };
+const mDTP = { loginUser, registerUser };
 
 export default connect(
   mSTP,

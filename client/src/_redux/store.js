@@ -8,15 +8,13 @@ import sessionReducer from '../components/Login/sessionReducer';
 
 const enhancer = composeWithDevTools(applyMiddleware(thunk));
 const persistedState = getStateFromLS();
-
 const store = createStore(sessionReducer, persistedState, enhancer);
 
 store.subscribe(
   throttle(() => {
-    const { session } = store.getState();
+    const state = store.getState();
     saveStateToLS({
-      ...session,
-      error: null,
+      ...state,
     });
   }, 1000)
 );

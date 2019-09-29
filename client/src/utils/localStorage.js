@@ -1,10 +1,11 @@
+/* eslint-disable */
 export const getStateFromLS = () => {
   try {
     const localState = localStorage.getItem('TemplatesState');
     if (localState === null) {
       return undefined;
     }
-    return ({ session: JSON.parse(localState) });
+    return (JSON.parse(localState));
   } catch (error) {
     console.log('loaalstorage error: ', error);
   }

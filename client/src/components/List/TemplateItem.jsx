@@ -32,6 +32,7 @@ TemplateItem.propTypes = {
     title: PropTypes.string,
     owner: PropTypes.object,
     createdAt: PropTypes.string,
+    image: PropTypes.string,
   }).isRequired,
 };
 

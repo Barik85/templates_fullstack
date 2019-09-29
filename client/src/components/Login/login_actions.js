@@ -1,10 +1,10 @@
 import { SUCCES_LOGIN, SUCCES_LOGOUT } from '../../_redux/actionTypes';
-import { requestLogin } from '../../api/api';
+import { requestLogin, requestLogout, requestRegister } from '../../api/api';
 
-export const loginUser = user => dispatch => {
-  requestLogin(user)
+export const registerUser = user => dispatch => {
+  requestRegister(user)
     .then(res => {
-      if (res && res.status === 200 && res.data) {
+      if (res && res.status === 201 && res.data) {
         dispatch({
           type: SUCCES_LOGIN,
           payload: res.data,
@@ -14,4 +14,27 @@ export const loginUser = user => dispatch => {
     .catch(err => err);
 };
 
-export const logoutUser = 1;
+export const loginUser = user => dispatch => {
+  requestLogin(user)
+    .then(res => {
+      if (res && res.status === 201 && res.data) {
+        dispatch({
+          type: SUCCES_LOGIN,
+          payload: res.data,
+        });
+      }
+    })
+    .catch(err => err);
+};
+
+export const logoutUser = () => (dispatch, getState) => {
+  const { token } = getState();
+
+  return (
+    requestLogout(token)
+      .finally(() => {
+        dispatch({ type: SUCCES_LOGOUT });
+      })
+      .catch(err => err)
+  );
+};

@@ -4,15 +4,23 @@ const randomPuppy = require('random-puppy');
 const listPropertys = 'title owner createdAt active_status image';
 
 const getTemplates = async (req, res, next) => {
-  const { user } = req;
-  let templates;
+  debugger;
+  try {
+    const { user } = req;
+    let templates = [];
 
-  if (user && user.role === 'admin') {
-    templates = await Templates.find({}).select(listPropertys);
-  } else {
-    templates = await Templates.find({ active_status: true }).select(listPropertys);
+    if (user && user.role === 'admin') {
+      templates = await Templates.find({}, listPropertys);
+    } else {
+      templates = await Templates.find({ active_status: true }, listPropertys)
+        .catch(err => console.log('error in templates: ', err));
+    }
+
+    return res.status(200).send(templates);
+  } catch(error) {
+    console.log('error in getTemplates', error.name);
+    return res.status(500).send(error);
   }
-  res.status(200).send(templates);
 }
 
 const createTemplate = async (req, res, next) => {
