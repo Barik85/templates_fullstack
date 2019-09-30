@@ -4,7 +4,6 @@ const randomPuppy = require('random-puppy');
 const listPropertys = 'title owner createdAt active_status image';
 
 const getTemplates = async (req, res, next) => {
-  debugger;
   try {
     const { user } = req;
     let templates = [];
